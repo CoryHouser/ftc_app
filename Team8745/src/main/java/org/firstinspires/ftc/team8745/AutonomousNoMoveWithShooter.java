@@ -28,6 +28,8 @@ public class AutonomousNoMoveWithShooter extends LinearOpMode {
     DcMotor shooterLeft;
     DcMotor shooterRight;
 
+    DcMotor ball_pickup;
+
     Servo shooterServo;
 
     public ElapsedTime runtime = new ElapsedTime();
@@ -51,13 +53,14 @@ public class AutonomousNoMoveWithShooter extends LinearOpMode {
         rightFRONT = hardwareMap.dcMotor.get("motor-right");
 
         //Back Motors
-        leftBACK = hardwareMap.dcMotor.get("motor-leftBACK");
-        rightBACK = hardwareMap.dcMotor.get("motor-rightBACK");
+        leftBACK = hardwareMap.dcMotor.get("motor-leftBack");
+        rightBACK = hardwareMap.dcMotor.get("motor-rightBack");
 
         //Shooter Motors
         shooterLeft = hardwareMap.dcMotor.get("shooter-left");
         shooterRight = hardwareMap.dcMotor.get("shooter-right");
 
+        ball_pickup = hardwareMap.dcMotor.get("motor-pickup");
         //servos
         shooterServo = hardwareMap.servo.get("shooter-servo");
 
@@ -104,7 +107,7 @@ public class AutonomousNoMoveWithShooter extends LinearOpMode {
             return;
         }
         */
-
+        ball_pickup.setPower(1);
         // Shoot Loaded Balls
         shooterRight.setPower(kShooterEnginePower);
         shooterLeft.setPower(kShooterEnginePower);

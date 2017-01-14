@@ -53,8 +53,8 @@ public class AutonomousWithShooter extends LinearOpMode {
         rightFRONT = hardwareMap.dcMotor.get("motor-right");
 
         //Back Motors
-        leftBACK = hardwareMap.dcMotor.get("motor-leftBACK");
-        rightBACK = hardwareMap.dcMotor.get("motor-rightBACK");
+        leftBACK = hardwareMap.dcMotor.get("motor-leftBack");
+        rightBACK = hardwareMap.dcMotor.get("motor-rightBack");
 
         //Shooter Motors
         shooterLeft = hardwareMap.dcMotor.get("shooter-left");
@@ -100,6 +100,7 @@ public class AutonomousWithShooter extends LinearOpMode {
 
 
 
+
         }
     }
 
@@ -113,18 +114,27 @@ public class AutonomousWithShooter extends LinearOpMode {
             return;
         }
         */
-        //activate ball pick up system
-        ball_pickup.setPower(1);
-        // Shoot Loaded Balls
-        shooterRight.setPower(kShooterEnginePower);
-        shooterLeft.setPower(kShooterEnginePower);
 
-        for (int i = 1; i <= 3; i++) {
-            waitNSeconds(1);
+
+        // Shoot Loaded Balls
+//        shooterRight.setPower(kShooterEnginePower);
+  //      shooterLeft.setPower(kShooterEnginePower);
+
+        for (int i = 1; i <= 2; i++) {
+            waitNSeconds(3);
+            shooterRight.setPower(kShooterEnginePower);
+            shooterLeft.setPower(kShooterEnginePower);
             shooterServo.setPosition((kServoNullPosition + (-kServoRange)));
             waitNSeconds(1);
-            shooterServo.setPosition(kServoNullPosition);
+            shooterServo.setPosition(kServoNullPosition + kServoRange);
+            waitNSeconds(1);
+            shooterRight.setPower(0);
+            shooterLeft.setPower(0);
+            ball_pickup.setPower(1);
         }
+        shooterRight.setPower(0);
+        shooterLeft.setPower(0);
+        ball_pickup.setPower(0);
 
 
         if (leftFRONT.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {

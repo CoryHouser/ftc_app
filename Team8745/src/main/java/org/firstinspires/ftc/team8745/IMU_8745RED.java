@@ -41,6 +41,8 @@ public class IMU_8745RED extends LinearOpMode {
     DcMotor shooter_l;
     DcMotor shooter_r;
 
+    DcMotor ball_pickup;
+
     Servo shooterServo;
 
 
@@ -64,14 +66,15 @@ public class IMU_8745RED extends LinearOpMode {
         right_f = hardwareMap.dcMotor.get("motor-right");
 
         //Back Motors
-        left_b = hardwareMap.dcMotor.get("motor-leftBACK");
-        right_b = hardwareMap.dcMotor.get("motor-rightBACK");
+        left_b = hardwareMap.dcMotor.get("motor-leftBack");
+        right_b = hardwareMap.dcMotor.get("motor-rightBack");
 
 
         //Shooter Motors
         shooter_l = hardwareMap.dcMotor.get("shooter-left");
         shooter_r = hardwareMap.dcMotor.get("shooter-right");
 
+        ball_pickup = hardwareMap.dcMotor.get("motor-pickup");
         //servos
         shooterServo = hardwareMap.servo.get("shooter-servo");
 
@@ -139,6 +142,8 @@ public class IMU_8745RED extends LinearOpMode {
         }
         */
         // Shoot Loaded Balls
+        ball_pickup.setPower(1);
+
         shooter_r.setPower(kShooterEnginePower);
         shooter_l.setPower(kShooterEnginePower);
 
