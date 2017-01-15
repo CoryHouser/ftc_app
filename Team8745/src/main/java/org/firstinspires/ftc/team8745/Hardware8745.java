@@ -161,7 +161,8 @@ public class Hardware8745 {
         // and named "imu".
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         imu.initialize(parameters);
-
+        telemetry.addLine("doneWithInit");
+        telemetry.update();
         // Set up our telemetry dashboard
 
 
@@ -412,7 +413,7 @@ public class Hardware8745 {
                 break;
             }
             double power = Math.abs(delta / degreesRequest);
-            power = Range.clip(power, .1, .5);
+            power = Range.clip(power, .1, .3);
 
             left_b.setPower(-power * Math.signum(delta));
             right_b.setPower(power * Math.signum(delta));
