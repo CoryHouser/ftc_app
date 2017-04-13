@@ -38,7 +38,7 @@ public class AutonomousWithShooter extends LinearOpMode {
 
     final double kServoNullPosition = 0.8;
     final double kServoRange = 0.6;
-    final double kShooterEnginePower = .7;
+    final double kShooterEnginePower = .6;
 
 
     private int ticsForInches(double inches){
@@ -92,6 +92,8 @@ public class AutonomousWithShooter extends LinearOpMode {
         //ball pickup direction
         ball_pickup.setDirection(DcMotorSimple.Direction.REVERSE);
         runtime.reset();
+       // shooterLeft.setMaxSpeed(kShooterMaxSpeed);
+       // shooterRight.setMaxSpeed(kShooterMaxSpeed);
     }
 
     public void waitNSeconds(int secondsToWait) {

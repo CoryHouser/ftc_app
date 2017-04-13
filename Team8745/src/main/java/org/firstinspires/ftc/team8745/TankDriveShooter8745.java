@@ -37,7 +37,7 @@ public class TankDriveShooter8745 extends OpMode {
 
     final double kServoNullPosition = 0.9;
     final double kServoRange = 0.6;
-    double kShootPower = .7;
+    double kShootPower = .5;
 
     public void init() {
         //Front Motors

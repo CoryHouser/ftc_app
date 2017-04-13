@@ -65,6 +65,8 @@ public class Hardware8745 {
     double LBpower;
     double RBpower;
 
+    int Beacon_Col;
+
     final double wheelDiameterInInches = 4;
     final int tpr = 1120;
     final double wheelCorrection = 0;
@@ -230,6 +232,7 @@ public class Hardware8745 {
     }
 
     public void moveToPosition(double distanceInIN, double power) {
+        setMode(DcMotor.RunMode.RUN_TO_POSITION);
         setALLposition(calcClicksForInches(distanceInIN));
         setALLpower(power);
         while (true) {
@@ -350,7 +353,7 @@ public class Hardware8745 {
         while (runTime.time() - startTime < secondsToWait) {
         }
     }
-
+/*
     public int Color_Case() {
         //Im going to do this by a number basis.
         // 2 = red
@@ -379,7 +382,7 @@ public class Hardware8745 {
         }
 
     }
-
+*/
     public enum ColorCase {
         RED_RED,
         RED_BLUE,
@@ -397,7 +400,7 @@ public class Hardware8745 {
     }
 
     public void turnIMU(double degreesRequest) {
-
+        setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         double initialHeading = getcurrentheading();
         double targetHeading = normalize(initialHeading + degreesRequest);
@@ -405,7 +408,7 @@ public class Hardware8745 {
         while (true) {
 
             double delta = normalize(targetHeading - normalize(getcurrentheading()));
-            if (Math.abs(delta) < 1) {
+            if (Math.abs(delta) < .5) {
                 left_f.setPower(0);
                 left_b.setPower(0);
                 right_f.setPower(0);
@@ -413,6 +416,7 @@ public class Hardware8745 {
                 break;
             }
             double power = Math.abs(delta / degreesRequest);
+            power = power * power;
             power = Range.clip(power, .1, .3);
 
             left_b.setPower(-power * Math.signum(delta));
@@ -430,6 +434,23 @@ public class Hardware8745 {
             telemetry.update();
         }
     }
-
+public int Color_Case() {
+    //number basis
+    //2 = red
+    //1 = blue
+    //0 = unknown
+    Beacon_Col = 0;
+    if (CSensorL.red() > Color_level) {
+        Beacon_Col += 20;
+    }else if (CSensorL.blue() > Color_level) {
+        Beacon_Col += 10;
+        //right side
+    } else if (CSensorR.red() > Color_level) {
+        Beacon_Col += 2;
+    }else if (CSensorR.blue() > Color_level) {
+        Beacon_Col += 2;
+    }
+    return  Beacon_Col;
+}
 
 }

@@ -51,7 +51,7 @@ public class IMU_8745RED extends LinearOpMode {
 
     final double kServoNullPosition = 0.8;
     final double kServoRange = 0.6;
-    final double kShooterEnginePower = 0.65;
+    final double kShooterEnginePower = 0.45;
 
     private int ticsForInches(double inches) {
         return (int) ((inches * TICS_PER_REV) / (Math.PI * WHEEL_DIAMETER));
@@ -327,10 +327,10 @@ public class IMU_8745RED extends LinearOpMode {
         telemetry.addData("heading", initialHeading);
         telemetry.update();
 
-        right_f.setPower(.10);
-        right_b.setPower(.10);
-        left_f.setPower(-.10);
-        left_b.setPower(-.10);
+//        right_f.setPower(.10);
+//        right_b.setPower(.10);
+//        left_f.setPower(-.10);
+//        left_b.setPower(-.10);
 
         while (super.opModeIsActive()) {
 
